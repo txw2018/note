@@ -34,11 +34,11 @@ vim /etc/sysconfig/jenkins
  vim /var/lib/jenkins/secrets/initialAdminPassword
  ```
  然后复制密码到输入框执行下一步
- ![alt image](https://note.youdao.com/yws/api/personal/file/WEB8706e23f7a4a339fe988d5729766fc3a?method=download&shareKey=7377b4627d9cf87094409a80ebb7deb2)
+ ![alt image](./images/jenkins/1644f34b464.png)
  选择安装推荐的插件即可（可能有的人插件安装失败，可以后面解决）
- ![alt image](https://note.youdao.com/yws/api/personal/file/WEBe434e0ab0236316f7f840ad68637f7f4?method=download&shareKey=62cf6c29876113e7bd9d14d284a9b659)
+ ![alt image](./images/jenkins/1644f351bcff65fb.png)
  创建管理员用户
-  ![alt image](https://note.youdao.com/yws/api/personal/file/WEBaf01e7fc679368e67e8f7525d6e953db?method=download&shareKey=0e1344331bb351dbb23646690bd31842)
+  ![alt image](./images/jenkins/1644f3544aaeefc2.png)
   填好之后下一步就好了，开始使用jenkins
 
 ## 插件安装失败处理
