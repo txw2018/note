@@ -27,14 +27,14 @@ vim /etc/sysconfig/jenkins
  ```
  然后在浏览器输入你的ip:8080就可以看到解锁页面（如果启动成功但是不能访问，可能是安全组规则没配置配置，还有防火墙的原因，百度解决）
 
- ![](C:\Users\Administrator\Desktop\txw\note\images\jenkins\1644f343fa6c8754.png)
+ ![alt image](C:\Users\Administrator\Desktop\txw\note\images\jenkins\1644f343fa6c8754.png)
 
  然后会叫我们输入管理员密码，页面上会有提示指定文件，我们用vim打开
  ```
  vim /var/lib/jenkins/secrets/initialAdminPassword
  ```
  然后复制密码到输入框执行下一步
- ![](C:\Users\Administrator\Desktop\txw\note\images\jenkins\1644f34b464.png)
+ ![alt image](https://note.youdao.com/yws/api/personal/file/WEB8706e23f7a4a339fe988d5729766fc3a?method=download&shareKey=7377b4627d9cf87094409a80ebb7deb2)
  选择安装推荐的插件即可（可能有的人插件安装失败，可以后面解决）
  ![alt image](https://note.youdao.com/yws/api/personal/file/WEBe434e0ab0236316f7f840ad68637f7f4?method=download&shareKey=62cf6c29876113e7bd9d14d284a9b659)
  创建管理员用户
