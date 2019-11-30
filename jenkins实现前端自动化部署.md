@@ -27,7 +27,7 @@ vim /etc/sysconfig/jenkins
  ```
  然后在浏览器输入你的ip:8080就可以看到解锁页面（如果启动成功但是不能访问，可能是安全组规则没配置配置，还有防火墙的原因，百度解决）
 
- ![alt image](./images/jenkins/1644f343fa6c8754.png)
+ ![alt image](images/jenkins/1644f343fa6c8754.png)
 
  然后会叫我们输入管理员密码，页面上会有提示指定文件，我们用vim打开
  ```
