@@ -571,6 +571,3 @@ export const mutations = {
 <span v-once>This will never change: {{msg}}</span>
 ```
 
-#### 总结
-
-学习技术就要多刷掘金，你就会知道自己多菜！！！！！然后偷偷去学习大神的技术
