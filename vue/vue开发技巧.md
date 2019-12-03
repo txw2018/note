@@ -127,7 +127,7 @@ export default {
 
 现在三个嵌套的组件, A -> B -> C  ,我们现在要从A传值给C, 或者C通过emit传值给A
 
-![img](C:\Users\Administrator\Desktop\txw\note\images\vue\1575352877.jpg)
+![img](../images/vue/1575352877.jpg)
 
 A组件
 
