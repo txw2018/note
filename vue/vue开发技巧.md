@@ -1,4 +1,4 @@
-#### 一键生成.vue文件模板
+### 一键生成.vue文件模板
 
 我们借用vscode自带的功能
 
@@ -48,7 +48,9 @@
 
 
 
-#### 重置data或者获取data初始值
+### 重置data或者获取data初始值
+
+在某些情况我们可能要重置data上面的某些属性
 
 ```javascript
 this.$data //获取当前状态的data
@@ -58,7 +60,7 @@ Object.assign(this.$data,this.$options.data()) //重置data
 
 
 
-####  强制刷新组件
+###  强制刷新组件
 
 ```javascript
 this.$forceUpdate() //迫使 Vue 实例重新渲染。注意它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。
@@ -80,7 +82,21 @@ key++;
 
 
 
-#### 长列表优化
+### performance[文档](https://cn.vuejs.org/v2/api/#performance)
+
+进行组件初始化、编译、渲染和打补丁的性能追踪
+
+```javascript
+//main.js
+const isDev = process.env.NODE_ENV !== "production";
+Vue.config.performance = isDev;
+```
+
+![img](../images/vue/1575336533.jpg)
+
+
+
+### 长列表优化
 
 当我们遇到很多的数据展示且不需要响应式变化时，我们就可以使用[Object.freeze](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)进行优化；
 
@@ -89,25 +105,113 @@ key++;
 当我们把一个对象传给实例的data，Vue会使用`Object.defineProperty`把这些属性响应式，使用了 [Object.freeze](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)之后，不仅可以减少 `observer` 的开销，还能减少不少内存开销，Vue有人提了相关[issue](https://github.com/vuejs/vue/issues/4384)
 
 ```javascript
-this.list = Object.freeze(Object.assign({}, this.list))
+export default {
+  data(){
+    return {
+      list: []
+    }
+  },
+  async created() {
+    const list = await this.$axios.get("/goodsList");
+    this.list = Object.freeze(list);
+  }
+};
+
 ```
 
 
 
-#### $attrs和$listeners的使用场景
+### $attrs & $listeners
 
-```javascript
-A -> B -> C
-$attrs //跨组件传值 A传值给C 在B组件上写上 v-bind="$attrs"
-$listeners //跨组件执行事件 在C执行emit传值给A组件 在B组件上写上 v-on="$listeners"
-一般在对UI组件进行二次封装时，只写上常用的一些属性跟方法，然后写上$attrs和$listners，我们使用组件时就可以直接使用原组件的属性跟方法
+我们平时组件传值props跟emit用的比较多，但是有些时候他们不是父子组件就比较麻烦了
+
+现在三个嵌套的组件, A -> B -> C  ,我们现在要从A传值给C, 或者C通过emit传值给A
+
+![img](C:\Users\Administrator\Desktop\txw\note\images\vue\1575352877.jpg)
+
+A组件
+
+```vue
+<template>
+  <div>
+    <B :name="name" @changeName="changeName"/>
+  </div>
+</template>
+
+<script>
+import B from './B'
+export default {
+  components: {
+    B
+  },
+  data () {
+    return {
+      name:'蜡笔小新'
+    }
+  },
+  methods: {
+    changeName(msg){
+      this.name = msg
+    }
+  }
+}
+</script>
+
 ```
 
+B组件
+
+```vue
+<template>
+  <div>
+    <C v-bind="$attrs" v-on="$listeners"/>
+  </div>
+</template>
+<script>
+import C from './C'
+export default {
+  components: {
+    C
+  },
+}
+</script>
+
+```
+
+C组件
+
+```vue
+<template>
+  <div>
+    {{name}}
+    <button @click="changeName">修改</button>
+  </div>
+</template>
+<script>
+export default {
+  props:{
+    // A组件传来的
+    name:{
+      type:String
+    }
+  },
+  methods: {
+    changeName(){
+      this.$emit('changeName','coder') //传给A组件
+    }
+  }
+}
+</script>
+
+```
+
+这样我们就实现了跨组件传值，一般在对UI组件进行二次封装时，只写上常用的一些属性跟方法，然后写上$attrs和$listners，我们使用组件时就可以直接使用原组件的属性跟方法
 
 
-#### .sync修饰符
 
-因为vue带来的双向绑定给开发带来了便利，同时也带来了代码维护上的问题，我们可以在子组件直接修改父组件穿的prop，新版本直接修改会报warn,推荐以 `update:myPropName` 的模式触发事件取而代之
+### .sync修饰符
+
+因为vue带来的双向绑定给开发带来了便利，同时也带来了代码维护上的问题，我们可以在子组件直接修改父组件穿的prop，新版本直接修改会报warn,官方推荐以 `update:myPropName` 的模式触发事件取而代之
 
 ```vue
 <text-document v-bind:title.sync="msg"></text-document>
@@ -118,7 +222,84 @@ $listeners //跨组件执行事件 在C执行emit传值给A组件 在B组件上�
 this.$emit('update:title', newTitle)
 ```
 
-#### 自定义组件的 `v-model` [文档](https://cn.vuejs.org/v2/guide/components-custom-events.html#自定义组件的-v-model)
+
+
+### hook
+
+这是一个文档中没有的api,在源码中存在的,我们可以看vue源码_init函数中是通过callHook调用生命周期的
+
+```javascript
+      vm._self = vm;
+      initLifecycle(vm);
+      initEvents(vm);
+      initRender(vm);
+      callHook(vm, 'beforeCreate');
+      initInjections(vm); // resolve injections before data/props
+      initState(vm);
+      initProvide(vm); // resolve provide after data/props
+      callHook(vm, 'created');
+```
+
+然后我们找到callHook，我们可以看到vm._hasHookEvent为true时就会执行 vm.$emit('hook:' + hook)
+
+```javascript
+ function callHook (vm, hook) {
+    // #7573 disable dep collection when invoking lifecycle hooks
+    pushTarget();
+    var handlers = vm.$options[hook];
+    var info = hook + " hook";
+    if (handlers) {
+      for (var i = 0, j = handlers.length; i < j; i++) {
+        invokeWithErrorHandling(handlers[i], vm, null, vm, info);
+      }
+    }
+    if (vm._hasHookEvent) {
+      vm.$emit('hook:' + hook);
+    }
+    popTarget();
+  }   
+```
+
+然后我们通过`_hasHookEven`t找到相关代码，当通过$on去监听时，如果事件名以 hooks: 作为前缀，vm._hasHookEvent就会被置为true
+
+```javascript
+    var hookRE = /^hook:/;
+    Vue.prototype.$on = function (event, fn) {
+      var vm = this;
+      if (Array.isArray(event)) {
+        for (var i = 0, l = event.length; i < l; i++) {
+          vm.$on(event[i], fn);
+        }
+      } else {
+        (vm._events[event] || (vm._events[event] = [])).push(fn);
+        // optimize hook:event cost by using a boolean flag marked at registration
+        // instead of a hash lookup
+        if (hookRE.test(event)) {
+          vm._hasHookEvent = true;
+        }
+      }
+      return vm
+    };
+```
+
+使用场景
+
+```javascript
+ mounted(){
+    let i = 0
+    this.timer = setInterval(()=>{
+      console.log(++i);
+    },1000)
+
+    this.$on('hook:beforeDestroy',()=>{
+        clearInterval(this.timer)
+    })
+  }
+```
+
+
+
+### 自定义组件的 `v-model` [文档](https://cn.vuejs.org/v2/guide/components-custom-events.html#自定义组件的-v-model)
 
 一个组件上的 `v-model` 默认会利用名为 `value` 的 prop 和名为 `input` 的事件，但是像单选框、复选框等类型的输入控件可能会将 `value` 特性用于[不同的目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)。`model` 选项可以用来避免这样的冲突：
 
@@ -145,9 +326,11 @@ Vue.component('base-checkbox', {
 <base-checkbox v-model="lovingVue"></base-checkbox>
 ```
 
-这里的 `lovingVue` 的值将会传入这个名为 `checked` 的 prop。同时当 `触发一个 `change` 事件并附带一个新的值的时候，这个 `lovingVue` 的属性将会被更新。
+这里的 `lovingVue` 的值将会传入这个名为 `checked` 的 prop。同时当 触发一个` change`事件并附带一个新的值的时候，这个 `lovingVue` 的属性将会被更新。
 
-#### 自动引入route文件
+
+
+### 自动引入route文件
 
 当我们项目比较大的时候，我们就会把路由文件根据不同的业务模块拆分
 
@@ -191,7 +374,7 @@ export default new Router({
 
 
 
-#### 更新缓存的组件
+### 更新缓存的组件
 
 使用vue的生命周期函数[activated](https://cn.vuejs.org/v2/api/#activated)
 
@@ -202,11 +385,9 @@ export default new Router({
 
 
 
+###  watch的高级用法
 
-
-####  watch的高级用法
-
-1.当我们watch一个值时，第一次不会指向，只有值发生变化时才会执行，此时需要我们将immediate设为true
+1.当我们watch一个值时，第一次不会执行，只有值发生变化时才会执行，此时需要我们将immediate设为true
 
 2.普通的watch方法无法无法监听对象内部属性的改变，我们把deep设为true时就能进行深度监听了
 
@@ -229,7 +410,7 @@ new Vue({
 
 
 
-#### 异步数据传值给子组件
+### 异步数据传值给子组件
 
 这是新手都会遇到的问题，父组件异步获取数据传给子组件，子组件拿不到值，下面是我平时的解决方案
 
@@ -245,13 +426,46 @@ or
 
 
 
-#### 巧用slot
+### 巧用slot
 
-插槽是一个很好用的api
+插槽是一个很好用的api,特别是在封装组件的时候，让组件有更多扩展的空间
+
+```html
+//封装通用header组件
+<template>
+  <div class="cc-header header">
+    <cc-svg-icon
+      @click="goback"
+      icon-class="left-arrow"
+      class-name="left-arrow"
+      size=".2rem"
+    ></cc-svg-icon>
+    <div v-if="$slots.center" class="cc-header-center">
+      <slot name="center"></slot>
+    </div>
+    <p class="cc-header-title" v-else>{{title}}</p>
+    <div class="cc-header-right">
+      <slot name="right"></slot>
+    </div>
+  </div>
+</template>
+```
+
+```html
+//使用组件
+<cc-header>
+    <template slot="center">
+        <van-search class="search-input" placeholder="通用名" v-model="params.search" />
+    </template>
+    <template slot="right">
+        <div class="search-btn" @click="toSearch">搜索</div>
+    </template>
+ </cc-header>
+```
 
 
 
-#### 开发插件
+### 开发插件
 
 Vue.js 的插件应该暴露一个 `install` 方法。这个方法的第一个参数是 `Vue` 构造器，第二个参数是一个可选的选项对象：
 
@@ -292,7 +506,7 @@ Vue.use(MyPlugin)
 
 
 
-#### ref
+### ref
 
 `ref` 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 `$refs` 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例
 
@@ -305,15 +519,22 @@ Vue.use(MyPlugin)
 
 
 
-#### hook
-
-这是一个文档中没有的api
-
-#### 一些不常用却很牛逼的api
+### 一些不常用却很牛逼的api
 
 ##### [Vue.observable( object )](https://cn.vuejs.org/v2/api/#Vue-observable)
 
-让一个对象可响应。Vue 内部会用它来处理 `data` 函数返回的对象。
+让一个对象可响应。Vue 内部会用它来处理 `data` 函数返回的对象。当我们项目没使用vuex时，就可以使用这个api
+
+```javascript
+import Vue from 'vue'
+export const store = Vue.observable({ count: 0 })
+export const mutations = {
+  setCount (count) {
+    store.count = count
+  }
+}
+
+```
 
 ##### [v-pre](https://cn.vuejs.org/v2/api/#v-pre)
 
@@ -352,4 +573,4 @@ Vue.use(MyPlugin)
 
 #### 总结
 
-学习技术就是多水群多刷掘金，你就会知道自己多菜！！！！！然后偷偷去学习大神的技术
+学习技术就要多刷掘金，你就会知道自己多菜！！！！！然后偷偷去学习大神的技术
