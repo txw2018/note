@@ -92,7 +92,7 @@ const isDev = process.env.NODE_ENV !== "production";
 Vue.config.performance = isDev;
 ```
 
-![img](../images/vue/1575336533.jpg)
+![img](../../images/vue/1575336533.jpg)
 
 
 
@@ -127,7 +127,7 @@ export default {
 
 现在三个嵌套的组件, A -> B -> C  ,我们现在要从A传值给C, 或者C通过emit传值给A
 
-![img](../images/vue/1575352877.jpg)
+![img](../../images/vue/1575352877.jpg)
 
 A组件
 
@@ -334,7 +334,7 @@ Vue.component('base-checkbox', {
 
 当我们项目比较大的时候，我们就会把路由文件根据不同的业务模块拆分
 
-![image-20191202152422050](../images/vue/1575296793073.jpg)
+![image-20191202152422050](../../images/vue/1575296793073.jpg)
 
 每个子模块导出一个路由配置数组
 
