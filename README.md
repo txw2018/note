@@ -19,4 +19,5 @@
 ## 框架篇
 
 1.[VUE开发技巧](https://github.com/fellowT/note/issues/3)
-3.[深入学习VUE](https://github.com/fellowT/note/issues/4)
+
+2.[深入学习VUE](https://github.com/fellowT/note/issues/4)
