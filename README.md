@@ -21,3 +21,11 @@
 1.[VUE开发技巧](https://github.com/fellowT/note/issues/3)
 
 2.[深入学习VUE](https://github.com/fellowT/note/issues/4)
+
+## 工具篇
+
+1.[webpack知识](https://github.com/fellowT/note/issues/5)
+
+2.[eslint知识](https://github.com/fellowT/note/issues/6)
+
+3.[jenkins知识](https://github.com/fellowT/note/issues/7)
