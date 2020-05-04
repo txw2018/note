@@ -24,8 +24,8 @@
 
 ## 工具篇
 
-1.[webpack知识](https://github.com/fellowT/note/issues/5)
+1.[webpack知识点](https://github.com/fellowT/note/issues/5)
 
-2.[eslint知识](https://github.com/fellowT/note/issues/6)
+2.[eslint配置介绍](https://github.com/fellowT/note/issues/6)
 
-3.[jenkins知识](https://github.com/fellowT/note/issues/7)
+3.[jenkins实现前端自动化部署](https://github.com/fellowT/note/issues/7)
