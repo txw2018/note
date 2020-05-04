@@ -4,7 +4,7 @@
 
 ## javascript
 
-更新中。。。
+1.[继承](https://github.com/fellowT/note/issues/9)
 
 ## 前端性能优化
 
