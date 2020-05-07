@@ -32,3 +32,8 @@
 2.[eslint配置介绍](https://github.com/fellowT/note/issues/6)
 
 3.[jenkins实现前端自动化部署](https://github.com/fellowT/note/issues/7)
+## 设计模式
+
+1.[单例模式](https://github.com/fellowT/note/issues/10)
+
+2.[策略模式](https://github.com/fellowT/note/issues/11)
