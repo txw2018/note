@@ -7,6 +7,8 @@
 
 1.[继承](https://github.com/fellowT/note/issues/9)
 
+1.[闭包](https://github.com/fellowT/note/issues/12)
+
 ## 前端性能优化
 
 更新中。。。
