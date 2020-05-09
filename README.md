@@ -39,3 +39,5 @@
 1.[单例模式](https://github.com/fellowT/note/issues/10)
 
 2.[策略模式](https://github.com/fellowT/note/issues/11)
+
+3.[职责链模式](https://github.com/fellowT/note/issues/13)
