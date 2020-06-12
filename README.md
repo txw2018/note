@@ -27,7 +27,7 @@
 
 2.[深入学习Vue](https://github.com/fellowT/note/issues/4)
 
-2.[Vue 响应式原理](https://github.com/fellowT/note/issues/14)
+3.[Vue 响应式原理](https://github.com/fellowT/note/issues/14)
 
 ## 工具篇
 
