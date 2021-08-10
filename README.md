@@ -11,7 +11,7 @@
 
 ## 前端性能优化
 
-更新中。。。
+1.[axios取消重复请求](https://github.com/fellowT/note/issues/1)
 
 ## 浏览器相关
 
