@@ -11,7 +11,7 @@
 
 ## 前端性能优化
 
-1.[axios取消重复请求](https://github.com/fellowT/note/javascript/cancelDuplicateRequest.html)
+1.[axios取消重复请求](https://github.com/txw2018/note/blob/master/javascript/cancelDuplicateRequest.html)
 
 ## 浏览器相关
 
