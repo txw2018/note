@@ -21,7 +21,7 @@
 
 3.[跨站请求伪造（CSRF）](https://github.com/fellowT/note/issues/8)
 
-## 框架篇
+## Vue相关知识
 
 1.[Vue开发技巧](https://github.com/fellowT/note/issues/3)
 
@@ -29,7 +29,10 @@
 
 3.[Vue 响应式原理](https://github.com/fellowT/note/issues/14)
 
-3.[Vue 模板编译](https://github.com/fellowT/note/issues/15)
+4.[Vue 模板编译](https://github.com/fellowT/note/issues/15)
+
+5.[合并策略](https://github.com/fellowT/note/issues/16)
+
 
 ## 工具篇
 
