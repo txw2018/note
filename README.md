@@ -31,9 +31,9 @@
 
 4.[Vue 模板编译](https://github.com/fellowT/note/issues/15)
 
-5.[合并策略](https://github.com/fellowT/note/issues/16)
+5.[合并策略](https://github.com/fellowT/note/issues/17)
 
-6.[学习调试vue源码 ](https://github.com/fellowT/note/issues/17)
+6.[学习调试vue源码 ](https://github.com/fellowT/note/issues/18)
 
 
 ## 工具篇
