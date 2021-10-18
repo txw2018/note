@@ -33,6 +33,8 @@
 
 5.[合并策略](https://github.com/fellowT/note/issues/16)
 
+6.[学习调试vue源码 ](https://github.com/fellowT/note/issues/17)
+
 
 ## 工具篇
 
