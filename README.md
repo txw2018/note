@@ -35,6 +35,8 @@
 
 6.[学习调试vue源码 ](https://github.com/fellowT/note/issues/18)
 
+7.[组件注册](https://github.com/fellowT/note/issues/19)
+
 
 ## 工具篇
 
