@@ -37,6 +37,7 @@
 
 7.[组件注册](https://github.com/fellowT/note/issues/19)
 
+8.[异步组件](https://github.com/fellowT/note/issues/20)
 
 ## 工具篇
 
