@@ -25,7 +25,7 @@
 
 1.[Vue开发技巧](https://github.com/fellowT/note/issues/3)
 
-2.[深入学习Vue](https://github.com/fellowT/note/issues/4)
+2.[Vue.extend（options）方法解析](https://github.com/fellowT/note/issues/4)
 
 3.[Vue 响应式原理](https://github.com/fellowT/note/issues/14)
 
