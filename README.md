@@ -29,7 +29,7 @@
 
 3.[Vue 响应式原理](https://github.com/fellowT/note/issues/14)
 
-4.[Vue 模板编译](https://github.com/fellowT/note/issues/15)
+4.[生命周期](https://github.com/fellowT/note/issues/15)
 
 5.[合并策略](https://github.com/fellowT/note/issues/17)
 
