@@ -55,3 +55,5 @@
 3.[职责链模式](https://github.com/fellowT/note/issues/13)
 
 4.[观察者模式](https://github.com/fellowT/note/issues/21)
+
+4.[发布订阅模式](https://github.com/fellowT/note/issues/22)
