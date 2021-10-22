@@ -53,3 +53,5 @@
 2.[策略模式](https://github.com/fellowT/note/issues/11)
 
 3.[职责链模式](https://github.com/fellowT/note/issues/13)
+
+4.[观察者模式](https://github.com/fellowT/note/issues/21)
