@@ -11,7 +11,7 @@
 
 3.[commonjs跟Esmodule的区别](https://github.com/fellowT/note/issues/23)
 
-## 前端性能优化
+## 工作日常需求
 
 1.[axios取消重复请求](https://github.com/txw2018/note/blob/master/javascript/cancelDuplicateRequest.html)
 
