@@ -15,7 +15,7 @@
 
 1.[axios取消重复请求](https://github.com/txw2018/note/blob/master/javascript/cancelDuplicateRequest.html)
 
-2.[使用requestAnimationFrame实现倒计时](https://github.com/txw2018/note/blob/master/javascript/cancelDuplicateRequest.html)
+2.[使用requestAnimationFrame实现倒计时](https://github.com/fellowT/note/issues/24)
 
 
 ## 浏览器相关
