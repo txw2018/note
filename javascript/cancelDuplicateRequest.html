@@ -1,152 +1,91 @@
 
-```
-const inBrowser = typeof window !== 'undefined';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    
+  <button onclick="post()">测试</button>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    
+    const pendingRequest = {} // 储存pending请求
+    const whiteRequestList = ['/todos/1'] // 需要取消重复请求的白名单
 
-
-let prev = Date.now();
-function fallback(fn) {
-    const curr = Date.now();
-    const ms = Math.max(0, 16 - (curr - prev));
-    const id = setTimeout(fn, ms);
-    prev = curr + ms;
-    return id;
-}
-
-const iRaf = window.requestAnimationFrame || fallback;
-const iCancel = window.cancelAnimationFrame || window.clearTimeout;
-
-function raf(fn) {
-    return iRaf(fn)
-}
-
-function cancelRaf(id) {
-    iCancel(id)
-}
-function isSameSecond(time1, time2) {
-    return Math.floor(time1 / 1000) === Math.floor(time2 / 1000);
-}
-
-const SECOND = 1000;
-const MINUTE = 60 * SECOND;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-
-function parseTimeData(time) {
-    const days = Math.floor(time / DAY);
-    const hours = Math.floor((time % DAY) / HOUR);
-    const minutes = Math.floor((time % HOUR) / MINUTE);
-    const seconds = Math.floor((time % MINUTE) / SECOND);
-    const milliseconds = Math.floor(time % SECOND);
-
-    return {
-        days,
-        hours,
-        minutes,
-        seconds,
-        milliseconds,
-    };
-}
-function noop() {
-
-}
-const DEFAULT_OPTIONS = {
-    time: 30 * 60 * 60 * 1000,
-    autoStart: true,
-    millisecond: false,
-    changeFn: noop,
-    finishFn: noop
-}
-class CountDown {
-    constructor(options) {
-        const { time, autoStart, millisecond, changeFn, finishFn } = { ...DEFAULT_OPTIONS, ...options }
-        this.remain = 0
-        this.time = time
-        this.autoStart = autoStart
-        this.millisecond = millisecond
-        this.changeFn = changeFn
-        this.finishFn = finishFn
-        this.reset()
+    const generateReqKey = (config) => {
+      const { url } = config
+      if (!url) return
+      return whiteRequestList.filter(item => {
+        return url.includes(item)
+      })[0]
     }
-    start() {
-        if (this.counting) {
-            return;
-        }
-        this.counting = true;
-        this.endTime = Date.now() + this.remain;
-        this.tick();
-    }
-    pause() {
-        this.counting = false;
-        cancelRaf(this.rafId);
-    }
-    reset() {
-        this.pause();
-        this.remain = +this.time;
-
-        if (this.autoStart) {
-            this.start();
-        }
-
-    }
-    tick() {
-        if (!inBrowser) {
-            return;
-        }
-
-        if (this.millisecond) {
-            this.microTick();
-        } else {
-            this.macroTick();
-        }
-    }
-    microTick() {
-        this.rafId = raf(() => {
-            if (!this.counting) {
-                return;
+    // 将请求添加到pendingRequest
+    const addPendingRequest = (config) => {
+      const requestKey = generateReqKey(config)
+      if (requestKey) {
+        config.cancelToken =
+          config.cancelToken ||
+          new axios.CancelToken((cancel) => {
+            if (!pendingRequest[requestKey]) {
+              pendingRequest[requestKey] = cancel
             }
-
-            this.setRemain(this.getRemain());
-
-            if (this.remain > 0) {
-                this.microTick();
-            }
-        });
-    }
-    macroTick() {
-        this.rafId = raf(() => {
-            if (!this.counting) {
-                return;
-            }
-
-            const remain = this.getRemain();
-
-            if (!isSameSecond(remain, this.remain) || remain === 0) {
-                this.setRemain(remain);
-            }
-
-            if (this.remain > 0) {
-                this.macroTick();
-            }
-        });
+          })
+      }
     }
 
-    getRemain() {
-        return Math.max(this.endTime - Date.now(), 0);
+    // 重复请求时取消上次请求并在pendingRequest移除
+    function removePendingRequest(config) {
+      const requestKey = generateReqKey(config)
+      if (pendingRequest[requestKey]) {
+        const cancel = pendingRequest[requestKey]
+        cancel(requestKey)
+        delete pendingRequest[requestKey]
+      }
     }
+    const http =  axios.create({
+      baseURL: 'https://some-domain.com/api/',
+      timeout: 1000,
+    });
+    // 添加请求拦截器
+    http.interceptors.request.use(function (config) {
+      removePendingRequest(config) // 检查是否存在重复请求，若存在则取消已发的请求
+      addPendingRequest(config) // 把当前请求添加到pendingRequest对象中
+        return config;
+      }, function (error) {
+        // 对请求错误做些什么
+        return Promise.reject(error);
+      });
 
-    setRemain(remain) {
-        this.remain = remain;
-        this.changeFn(remain)
-        if (remain === 0) {
-            this.pause();
-            this.finishFn()
+    // 添加响应拦截器
+    http.interceptors.response.use(function (response) {
+      removePendingRequest(response.config) // 从pendingRequest对象中移除请求
+        // 2xx 范围内的状态码都会触发该函数。
+        // 对响应数据做点什么
+        return response;
+      }, function (error) {
+
+      removePendingRequest(error.config || {}) // 从pendingRequest对象中移除请求
+      if (axios.isCancel(error)) { // 取消的请求会进入这里
+        return {
+          isCancel: true
         }
-    }
+      }
+        return Promise.reject(error);
+      });
 
 
-}
 
 
-
-```
-
+      function post(){
+        http.get('https://jsonplaceholder.typicode.com/todos/1')
+        .then(res => {
+          console.log(res);
+        })
+      }
+  </script>
+</body>
+</html>
