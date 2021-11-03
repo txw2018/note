@@ -44,7 +44,7 @@
 
 8.[异步组件](https://github.com/fellowT/note/issues/20)
 
-9.[computed实现原理](https://github.com/fellowT/note/issues/25)
+9.[computed实现原理](https://github.com/fellowT/note/issues/26)
 
 ## 工具篇
 
