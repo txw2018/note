@@ -44,6 +44,8 @@
 
 8.[异步组件](https://github.com/fellowT/note/issues/20)
 
+9.[computed实现原理](https://github.com/fellowT/note/issues/25)
+
 ## 工具篇
 
 1.[webpack知识点](https://github.com/fellowT/note/issues/5)
