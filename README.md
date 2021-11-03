@@ -46,6 +46,8 @@
 
 9.[computed实现原理](https://github.com/fellowT/note/issues/26)
 
+9.[nextTick实现原理](https://github.com/fellowT/note/issues/27)
+
 ## 工具篇
 
 1.[webpack知识点](https://github.com/fellowT/note/issues/5)
