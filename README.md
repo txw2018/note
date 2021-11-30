@@ -26,6 +26,7 @@
 
 3.[跨站请求伪造（CSRF）](https://github.com/fellowT/note/issues/8)
 
+3.[Chrome您的连接不是私密连接解决办法](https://github.com/fellowT/note/issues/28)
 ## Vue相关知识
 
 1.[Vue开发技巧](https://github.com/fellowT/note/issues/3)
