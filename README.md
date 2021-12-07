@@ -58,6 +58,8 @@
 3.[jenkins实现前端自动化部署](https://github.com/fellowT/note/issues/7)
 
 3.[git常用命令](https://github.com/fellowT/note/issues/25)
+
+4.[CLI相关](https://github.com/fellowT/note/issues/29)
 ## 设计模式
 
 1.[单例模式](https://github.com/fellowT/note/issues/10)
