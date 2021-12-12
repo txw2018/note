@@ -60,6 +60,10 @@
 3.[git常用命令](https://github.com/fellowT/note/issues/25)
 
 4.[CLI相关](https://github.com/fellowT/note/issues/29)
+## TS
+
+1.[基础类型](https://github.com/fellowT/note/issues/30)
+
 ## 设计模式
 
 1.[单例模式](https://github.com/fellowT/note/issues/10)
