@@ -17,6 +17,7 @@
 
 2.[使用requestAnimationFrame实现倒计时](https://github.com/fellowT/note/issues/24)
 
+2.[使用nodejs封装git命令选择环境提交代码 ](https://github.com/fellowT/note/issues/31)
 
 ## 浏览器相关
 
