@@ -65,6 +65,8 @@
 3.[git常用命令](https://github.com/fellowT/note/issues/25)
 
 4.[CLI相关](https://github.com/fellowT/note/issues/29)
+
+5.[git提交规范](https://github.com/fellowT/note/issues/34)
 ## TS
 
 1.[基础类型](https://github.com/fellowT/note/issues/30)
