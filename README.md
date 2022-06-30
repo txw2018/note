@@ -85,6 +85,9 @@
 
 ## 简单算法题
 1.[排序相关](https://github.com/fellowT/note/issues/35)
-2.[数组相关](https://github.com/fellowT/note/issues/35)
-3.[链表相关](https://github.com/fellowT/note/issues/36)
-4.[栈与队列相关](https://github.com/fellowT/note/issues/37)
+
+2.[数组相关](https://github.com/fellowT/note/issues/36)
+
+3.[链表相关](https://github.com/fellowT/note/issues/37)
+
+4.[栈与队列相关](https://github.com/fellowT/note/issues/38)
