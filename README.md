@@ -82,3 +82,9 @@
 4.[观察者模式](https://github.com/fellowT/note/issues/21)
 
 4.[发布订阅模式](https://github.com/fellowT/note/issues/22)
+
+## 简单算法题
+1.[排序相关](https://github.com/fellowT/note/issues/35)
+2.[数组相关](https://github.com/fellowT/note/issues/35)
+3.[链表相关](https://github.com/fellowT/note/issues/36)
+4.[栈与队列相关](https://github.com/fellowT/note/issues/37)
